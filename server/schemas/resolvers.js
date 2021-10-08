@@ -6,7 +6,7 @@ const controller = require('../controllers/user-controller')
 const resolvers = {
     Query: {
         user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('thoughts');
+            return User.findOne({ username }).populate('books');
         },
         me: async (parent, args, context) => {
             if (context.user) {
