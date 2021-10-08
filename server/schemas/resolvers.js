@@ -6,11 +6,13 @@ const controller = require('../controllers/user-controller')
 const resolvers = {
     Query: {
         user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('books');
+            const userRes = await controller.getSingleUser({username});
+            return userRes;
         },
         me: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('books');
+                const userRes = await controller.getSingleUser({ _id: context.user._id });
+                return userRes;
             }
             throw new AuthenticationError('You need to be logged in!!');
         }
