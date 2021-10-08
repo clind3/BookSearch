@@ -35,6 +35,7 @@ async function createAndStartApolloServer(typeDefs, resolvers) {
 })
 await server.start();
 server.applyMiddleware({ app });
+console.log('apollo server complete');
 }
 
 
