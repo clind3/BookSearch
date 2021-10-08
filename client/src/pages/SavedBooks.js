@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
+import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries'
 import { REMOVE_BOOK } from '../utils/mutation'
 import Auth from '../utils/auth';
@@ -25,7 +26,7 @@ const SavedBooks = () => {
         return false;
       }
 
-      const response = await getMe(token);
+      const response = await queryTime.data.me;
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -50,7 +51,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const response = await removeBook(bookId, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
